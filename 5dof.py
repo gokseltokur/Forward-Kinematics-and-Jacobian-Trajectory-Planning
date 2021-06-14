@@ -78,51 +78,51 @@ print ("H0_5=",np.matrix(H0_5))
 print ("postion of end effector=",H0_5[:,3])
 print ("orientation of end effector=",H0_5[:3,:3])
 
-zdata = []
-xdata = []
-ydata = []
+# zdata = []
+# xdata = []
+# ydata = []
 
 
-a = []
-a.append(H0_1)
-a.append(H0_2)
-a.append(H0_1)
-a.append(H0_2)
-a.append(H0_1)
+# a = []
+# a.append(H0_1)
+# a.append(H0_2)
+# a.append(H0_1)
+# a.append(H0_2)
+# a.append(H0_1)
 
-for i in range(3):
-    xdata = (H0_5[:,3])[i]
-    ydata = (H0_5[:,3])[i]
-    zdata = (H0_5[:,3])[i]
-
-
-
-
-%matplotlib inline
-import numpy as np
-import matplotlib.pyplot as plt
-
-from matplotlib import pyplot
-from mpl_toolkits.mplot3d import Axes3D
-
-fig = pyplot.figure(figsize=(6,6))
-ax = Axes3D(fig)
-
-#ax = plt.axes(projection='3d')
+# for i in range(3):
+#     xdata = (H0_5[:,3])[i]
+#     ydata = (H0_5[:,3])[i]
+#     zdata = (H0_5[:,3])[i]
 
 
 
-# Data for a three-dimensional line
+
+# %matplotlib inline
+# import numpy as np
+# import matplotlib.pyplot as plt
+
+# from matplotlib import pyplot
+# from mpl_toolkits.mplot3d import Axes3D
+
+# fig = pyplot.figure(figsize=(6,6))
+# ax = Axes3D(fig)
+
+# #ax = plt.axes(projection='3d')
 
 
-# Data for three-dimensional scattered points
-zdata = average_time
-xdata = test_number_of_nodes
-ydata = communities
-ax.scatter(xdata, ydata, zdata, c=ydata, cmap='brg')
 
-ax.set_xlabel('Number of Nodes')
-ax.set_ylabel('Number of Communities')
-ax.set_zlabel('Time(s)')
-ax.set_title('Number of Nodes x Number of Communities x Time(s)');
-pyplot.show()
+# # Data for a three-dimensional line
+
+
+# # Data for three-dimensional scattered points
+# zdata = average_time
+# xdata = test_number_of_nodes
+# ydata = communities
+# ax.scatter(xdata, ydata, zdata, c=ydata, cmap='brg')
+
+# ax.set_xlabel('Number of Nodes')
+# ax.set_ylabel('Number of Communities')
+# ax.set_zlabel('Time(s)')
+# ax.set_title('Number of Nodes x Number of Communities x Time(s)');
+# pyplot.show()
