@@ -1,3 +1,4 @@
+# Göksel Tokur
 import numpy as np
 from vpython import *
 
@@ -38,26 +39,30 @@ H2_3 = np.concatenate((H2_3, [[0,0,0,1]]), 0)
 H0_2=np.dot(H0_1, H1_2)
 H0_3=np.dot(H0_2, H2_3)
 
-print(np.matrix(H0_3))
-
-#print('Position of end effector ', (H0_3[:,3]))
-#print('Position of end effector ', ((H0_3[:,3])[0], (H0_3[:,3])[1], (H0_3[:,3])[2]))
-
-
-#print('Position of joint2 ', (H0_1[:,3]))
-
 joint2_pos = vector((H0_1[:,3])[0], (H0_1[:,3])[2], (H0_1[:,3])[1])
 joint3_pos = vector((H0_2[:,3])[0], (H0_2[:,3])[2], (H0_2[:,3])[1])
 end_effector_pos = vector((H0_3[:,3])[0], (H0_3[:,3])[2], (H0_3[:,3])[1])
 
-joint1 = cylinder(pos=vector(0,0,0), axis=vector(0,0.4,0), radius=0.1)
+print('###########################################################')
+print('Theta1: ', T1)
+print('Theta2: ', T2)
+print('H0_1: \n', H0_1)
+print('H0_2: \n', H0_2)
+print('H0_3: \n', H0_3)
+print('Joint 2 Position: ', joint2_pos)
+print('Joint 3 Position: ', joint3_pos)
+print('End Effector Position', end_effector_pos)
+print('###########################################################')
+
+
+joint1 = cylinder(pos=vector(0,0,0), axis=vector(0,0.4,0), radius=0.1, color=color.red)
 link11 = curve(pos=[joint1.pos, vector(0,a1,0)])
 link12 = curve(pos=[vector(0,a1,0), joint2_pos])
-joint2 = cylinder(pos=joint2_pos, axis=vector(0,0.4,0), radius=0.1)
-print(joint2_pos)
+joint2 = cylinder(pos=joint2_pos, axis=vector(0,0.4,0), radius=0.1, color=color.blue)
+#print(joint2_pos)
 link21 = curve(pos=[joint2.pos, vector(joint2.pos.x, joint2.pos.y+a3, joint2.pos.z)])
 link22 = curve(pos=[vector(joint2.pos.x, joint2.pos.y+a3, joint2.pos.z), joint3_pos])
-joint3 = box(pos=joint3_pos, length=0.2, height=0.2, width=0.2)
+joint3 = box(pos=joint3_pos, length=0.2, height=0.2, width=0.2, color=color.yellow)
 link31 = curve(pos=[joint3_pos, vector(joint3.pos.x, joint3.pos.y-a5, joint3.pos.z)])
 
 
@@ -98,14 +103,6 @@ def theta1(s):
     H0_2=np.dot(H0_1, H1_2)
     H0_3=np.dot(H0_2, H2_3)
 
-    print(np.matrix(H0_3))
-
-    #print('Position of end effector ', (H0_3[:,3]))
-    #print('Position of end effector ', ((H0_3[:,3])[0], (H0_3[:,3])[1], (H0_3[:,3])[2]))
-
-
-    #print('Position of joint2 ', (H0_1[:,3]))
-
     joint2_pos = vector((H0_1[:,3])[0], (H0_1[:,3])[2], (H0_1[:,3])[1])
     joint3_pos = vector((H0_2[:,3])[0], (H0_2[:,3])[2], (H0_2[:,3])[1])
     end_effector_pos = vector((H0_3[:,3])[0], (H0_3[:,3])[2], (H0_3[:,3])[1])
@@ -124,7 +121,19 @@ def theta1(s):
     #link31 = curve(pos=[joint3_pos, vector(joint3.pos.x, joint3.pos.y-a5, joint3.pos.z)])
     link31.modify(0, pos=joint3_pos)
     link31.modify(1, pos=vector(joint3.pos.x, joint3.pos.y-a5, joint3.pos.z))
-scene.append_to_caption('\nJoint 1 - Theta 1\n\n')   
+
+    print('###########################################################')
+    print('Theta1: ', T1)
+    print('Theta2: ', T2)
+    print('H0_1: \n', H0_1)
+    print('H0_2: \n', H0_2)
+    print('H0_3: \n', H0_3)
+    print('Joint 2 Position: ', joint2_pos)
+    print('Joint 3 Position: ', joint3_pos)
+    print('End Effector Position', end_effector_pos)
+    print('###########################################################')
+
+scene.append_to_caption('\n\nJoint 1 - Theta 1\n')   
 winput( bind=theta1 )
 
 def theta2(s):
@@ -165,14 +174,6 @@ def theta2(s):
     H0_2=np.dot(H0_1, H1_2)
     H0_3=np.dot(H0_2, H2_3)
 
-    print(np.matrix(H0_3))
-
-    #print('Position of end effector ', (H0_3[:,3]))
-    #print('Position of end effector ', ((H0_3[:,3])[0], (H0_3[:,3])[1], (H0_3[:,3])[2]))
-
-
-    #print('Position of joint2 ', (H0_1[:,3]))
-
     joint2_pos = vector((H0_1[:,3])[0], (H0_1[:,3])[2], (H0_1[:,3])[1])
     joint3_pos = vector((H0_2[:,3])[0], (H0_2[:,3])[2], (H0_2[:,3])[1])
     end_effector_pos = vector((H0_3[:,3])[0], (H0_3[:,3])[2], (H0_3[:,3])[1])
@@ -191,15 +192,19 @@ def theta2(s):
     #link31 = curve(pos=[joint3_pos, vector(joint3.pos.x, joint3.pos.y-a5, joint3.pos.z)])
     link31.modify(0, pos=joint3_pos)
     link31.modify(1, pos=vector(joint3.pos.x, joint3.pos.y-a5, joint3.pos.z))
-scene.append_to_caption('\nJoint 2 - Theta 2\n\n')   
+
+    print('###########################################################')
+    print('Theta1: ', T1)
+    print('Theta2: ', T2)
+    print('H0_1: \n', H0_1)
+    print('H0_2: \n', H0_2)
+    print('H0_3: \n', H0_3)
+    print('Joint 2 Position: ', joint2_pos)
+    print('Joint 3 Position: ', joint3_pos)
+    print('End Effector Position', end_effector_pos)
+    print('###########################################################')
+
+scene.append_to_caption('\n\nJoint 2 - Theta 2\n')   
 winput( bind=theta2 )
 
-# joint1 = cylinder(pos=vector(0,0,0), axis=vector(0,0.4,0), radius=0.1)
-# link11 = cylinder(pos=vector(joint1.pos.x, joint1.pos.y+0.4, joint1.pos.z), axis=vector(0,0.4,0), radius=0.01)
-# link12 = cylinder(pos=vector(link11.pos.x, link11.pos.y+0.4, link11.pos.z), axis=vector(0.4,0,0), radius=0.01)
-
-
-# joint2 = cylinder(pos=vector(0.4, joint1.pos.y+0.4+0.2, 0), axis=vector(0,0.4,0), radius=0.1)
-# link21 = cylinder(pos=vector(joint2.pos.x, joint2.pos.y+0.4, joint2.pos.z), axis=vector(0,0.4,0), radius=0.01)
-# link22 = cylinder(pos=vector(link21.pos.x, link21.pos.y+0.4, link21.pos.z), axis=vector(0.4,0,0), radius=0.01)
-#joint2 = cylinder(pos=vector(0.4, joint1.pos.y+0.4+0.2, 0), axis=vector(0,0.4,0), radius=0.1)
+scene.append_to_caption('\n\nWrite angles and hit enter to manipulate joints.\n')   
