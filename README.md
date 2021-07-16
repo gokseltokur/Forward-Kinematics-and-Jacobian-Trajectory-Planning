@@ -90,3 +90,41 @@ Model of the articulated robot with Theta1 parameter 0 degree, Theta2 parameter 
 
 ![articulatedrobotarm2](/imgs/2.png)
 Model of the articulated robot with Theta1 parameter 180 degree, Theta2 parameter 45 and Theta3 parameter -60 degree as shown in left. Homogeneous transformation matrices and positions of joints and end effector as shown in right in this state.
+
+## Jacobian Matrix of Articulated Robot Arm
+```python
+    I = [[1,0,0],[0,1,0],[0,0,1]]
+    m0_0_1 = [[0],[0],[1]]
+    JR_0_1 = H0_1[:3,:3]
+    JD_0_1 = H0_1[0:3,3]
+    JR_0_2 = H0_2[:3,:3]
+    JD_0_2 = H0_2[0:3,3]
+    JR_0_3 = H0_3[:3,:3]
+    JD_0_3 = H0_3[0:3,3]
+    print(JD_0_1, JD_0_2, JD_0_3)
+
+    # Joint1
+    J_joint1_up = np.cross(np.dot(I, m0_0_1), JD_0_3, axis=0)
+    J_joint1_down = np.dot(I, m0_0_1)
+    J_joint1 = np.concatenate((J_joint1_up, J_joint1_down), axis=0)
+    print(J_joint1)
+
+    # Joint2
+    J_joint2_up = np.cross(np.dot(JR_0_1, m0_0_1), (JD_0_3-JD_0_1), axis=0)
+    J_joint2_down = np.dot(JR_0_1, m0_0_1)
+    J_joint2 = np.concatenate((J_joint2_up, J_joint2_down), axis=0)
+    print(J_joint2)
+
+    # Joint3
+    J_joint3_up = np.cross(np.dot(JR_0_2, m0_0_1), (JD_0_3-JD_0_2), axis=0)
+    J_joint3_down = np.dot(JR_0_2, m0_0_1)
+    J_joint3 = np.concatenate((J_joint3_up, J_joint3_down), axis=0)
+    print(J_joint3)
+
+    J = np.concatenate((J_joint1, J_joint2, J_joint3), axis=1)
+```
+
+### Inverse Kinematics of Articulated Robot Arm
+
+![inversekinematics](imgs/3.png)
+![inversekinematics](imgs/4.png)
