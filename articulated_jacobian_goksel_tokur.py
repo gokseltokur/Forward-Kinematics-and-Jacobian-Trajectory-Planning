@@ -3,6 +3,9 @@ import numpy as np
 from vpython import *
 import time
 
+scene.width = 600
+scene.height = 600
+
 a1 = 1
 a2 = 1
 a3 = 1
